@@ -4,7 +4,7 @@ import {
   FETCH_STREAMS,
   CREATE_STREAM,
   EDIT_STREAM,
-  DELETE_STREAM
+  DELETE_STREAM,
 } from '../actions/types';
 
 export default (state = {}, action) => {
@@ -22,4 +22,4 @@ export default (state = {}, action) => {
     default:
       return state;
   }
-}
+};

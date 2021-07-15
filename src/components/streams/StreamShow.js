@@ -1,11 +1,33 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchStream } from '../../actions';
+// import history from '../../history';
+// import { Link } from 'react-router-dom';
+// const NodeMediaServer = require('node-media-server');
 
-const StreamShow = () => {
-  return (
-    <div>
-      streamshow
-    </div>
-  )
+class StreamShow extends React.Component {
+  componentDidMount() {
+    this.props.fetchStream(this.props.match.params.id);
+  }
+
+  render() {
+    if (!this.props.stream) {
+      return <div>Loading...</div>;
+    }
+
+    const { title, description } = this.props.stream;
+
+    return (
+      <div>
+        <h1>{title}</h1>
+        <h5>{description}</h5>
+      </div>
+    );
+  }
 }
 
-export default StreamShow
+const mapStateToProps = (state, ownProps) => {
+  return { stream: state.streams[ownProps.match.params.id] };
+};
+
+export default connect(mapStateToProps, { fetchStream })(StreamShow);
